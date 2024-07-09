@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load blog_tags %}
 <!DOCTYPE html>
 
 <!--// WEBSITE: https://themefisher.com-->
@@ -14,8 +15,9 @@
 	<section class="banner">
 		<div class="container">
 			<div class="banner-img">
-				<a href="/1"><img src="{% static 'images/fashion/bg-banner-2.jpg' %}" alt="" class="img-fluid w-100"></a>
+				<a href=""><img src="{% static 'images/fashion/bg-banner-2.jpg' %}" alt="" class="img-fluid w-100"></a>
 			</div>
+			{% comment %} <!--{% url 'blog:single' pid=post.id %}}--> {% endcomment %}
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="banner-content text-center">
@@ -23,8 +25,10 @@
 							<span class="text-capitalize letter-spacing-1 cat-name font-extra text-color">Travel</span>
 						</div>
 						<div class="post-title">
-							<h2><a href="/1">New summer hotspot in day life</a></h2>
+							<h2><a href="">New summer hotspot in day life</a></h2>
 						</div>
+						{% comment %} <!--{% url 'blog:single' pid=post.id %}--> {% endcomment %}
+						
 
 						<div class="post-meta footer-meta">
 							<ul class="list-inline">
@@ -38,7 +42,8 @@
 						<div class="post-content">
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Magnam nesciunt architecto quaerat
 								necessitatibus tenetur ratione eius numquam!</p>
-							<a href="/1" class="btn btn-grey mt-3"> read more</a>
+							<a href="" class="btn btn-grey mt-3"> read more</a>
+							{% comment %} <!--{% url 'blog:single' pid=post.id %}--> {% endcomment %}
 						</div>
 					</div>
 				</div>
@@ -51,245 +56,73 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-
-					<article class="post-list mb-5 pb-4 border-bottom">
-						<a class="post-thumb mb-3 d-block" href="/1">
-							<img src="{% static 'images/fashion/bg-fashion.jpg' %}" alt="" class="img-fluid w-100">
+					{% comment %} <!--{% url 'blog:single' pid=post.id %}--> {% endcomment %}
+					{% comment %} <article class="post-list mb-5 pb-4 border-bottom">
+						<a class="post-thumb mb-3 d-block" href="">
+							<img src="{{posts.0.image.url}}" alt="" class="img-fluid w-100">
 						</a>
+						
 						<div class="meta-cat">
-							<span class="letter-spacing cat-name font-extra text-uppercase font-sm">Experience</span>
+							<span class="letter-spacing cat-name font-extra text-uppercase font-sm">{{cat}}</span>
 						</div>
-						<h3 class="post-title mt-2"><a href="/1">A guide to Duxton Hill</a></h3>
+									
+						<h3 class="post-title mt-2"><a href="">{{posts.2.title}}</a></h3>
 
 						<div class="post-meta footer-meta">
 							<ul class="list-inline">
 								<li class="post-like list-inline-item">
-									<span class="font-sm letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>2 min read</span>
+									<span class="font-sm letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>{{post.time_to_read}} min read</span>
 								</li>
-								<li class="post-view list-inline-item letter-spacing-1">189 Views</li>
+								<li class="post-view list-inline-item letter-spacing-1">{{post.views}} Views</li>
 							</ul>
 						</div>
 						<div class="post-content">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Magnam nesciunt architecto quaerat
-								necessitatibus tenetur ratione eius numquam! elit. Earum in doloremque, odit quas repellat voluptatum
-								illo nulla ullam sunt, enim animi eaque dolorem possimus saepe! Fuga voluptas sapiente, nemo sit.</p>
+							<p>{{posts.1.content|truncatewords:18}}</p>
 
 						</div>
-					</article>
+					</article> {% endcomment %}
 
-
-
+					{% for post in posts %}
 					<div class="mb-4 post-list border-bottom pb-4">
 						<div class="row no-gutters">
 							<div class="col-md-5">
-								<a class="post-thumb " href="/1">
-									<img src="{% static 'images/fashion/img-1.jpg' %}" alt="" class="img-fluid w-100">
+								<a class="post-thumb" href="{% url 'blog:single' pid=post.id %}">
+									<img src="{{post.image.url}}" alt="" class="img-fluid w-100">
 								</a>
 							</div>
-
 							<div class="col-md-7">
 								<div class="post-article mt-sm-3">
 									<div class="meta-cat">
-										<span class="letter-spacing cat-name font-extra text-uppercase font-sm">Explore</span>
+										{% for cat in post.categories.all %}
+											<a href="/?category={{cat}}"><span class="letter-spacing cat-name font-extra text-uppercase font-sm"></span>
+											{% if not forloop.last %}
+												{{cat}}</a>,
+											{% else %}
+												{{cat}}</a>
+											{%endif%}
+										{% endfor %}
 									</div>
-									<h3 class="post-title mt-2"><a href="/1">Launch a New space</a></h3>
-
+									<h3 class="post-title mt-2"><a href="{% url 'blog:single' pid=post.id %}">{{post.title}}</a></h3>
 									<div class="post-meta">
 										<ul class="list-inline">
 											<li class="post-like list-inline-item">
-												<span class="font-sm letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>3 min
+												<span class="font-sm letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>{{post.time_to_read}} min
 													read</span>
 											</li>
-											<li class="post-view list-inline-item letter-spacing-1">259 Views</li>
+											<li class="post-view list-inline-item letter-spacing-1">{{post.views}} Views</li>
 										</ul>
 									</div>
 									<div class="post-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Magnam nesciunt architecto quaerat
-											necessitatibus tenetur ratione eius numquam!</p>
+										<p>{{post.content|truncatewords:15}}</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					{%endfor%}
 
-					<div class="mb-4 post-list border-bottom pb-4">
-						<div class="row no-gutters">
-							<div class="col-md-5">
-								<a class="post-thumb" href="/1">
-									<img src="{% static 'images/fashion/img-2.jpg' %}" alt="" class="img-fluid w-100">
-								</a>
-							</div>
+					{% include "blog-pagination.html" %}
 
-							<div class="col-md-7">
-								<div class="post-article mt-sm-3">
-									<div class="meta-cat">
-										<span class="letter-spacing cat-name font-extra text-uppercase font-sm">lifestyle</span>
-									</div>
-									<h3 class="post-title mt-2"><a href="/1">Bahamas morning</a></h3>
-
-									<div class="post-meta">
-										<ul class="list-inline">
-											<li class="post-like list-inline-item">
-												<span class="font-sm letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>2 min
-													read</span>
-											</li>
-											<li class="post-view list-inline-item letter-spacing-1">320 Views</li>
-										</ul>
-									</div>
-									<div class="post-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Magnam nesciunt architecto quaerat
-											necessitatibus tenetur ratione eius numquam!</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="mb-4 post-list border-bottom pb-4">
-						<div class="row no-gutters">
-							<div class="col-md-5">
-								<a class="post-thumb" href="/1">
-									<img src="{% static 'images/fashion/img-3.jpg' %}" alt="" class="img-fluid w-100">
-								</a>
-							</div>
-
-							<div class="col-md-7">
-								<div class="post-article mt-sm-3">
-									<div class="meta-cat">
-										<span class="letter-spacing cat-name font-extra text-uppercase font-sm">Travel</span>
-									</div>
-									<h3 class="post-title mt-2"><a href="/1">New summer hotspot</a></h3>
-
-									<div class="post-meta">
-										<ul class="list-inline">
-											<li class="post-like list-inline-item">
-												<span class="font-sm  letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>5 min
-													read</span>
-											</li>
-											<li class="post-view list-inline-item letter-spacing-1">380 Views</li>
-										</ul>
-									</div>
-									<div class="post-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Magnam nesciunt architecto quaerat
-											necessitatibus tenetur ratione eius numquam!</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="mb-4 post-list border-bottom pb-4">
-						<div class="row no-gutters">
-							<div class="col-md-5">
-								<a class="post-thumb" href="/1">
-									<img src="{% static 'images/fashion/img-4.jpg' %}" alt="" class="img-fluid w-100">
-								</a>
-							</div>
-
-							<div class="col-md-7">
-								<div class="post-article mt-sm-3">
-									<div class="meta-cat">
-										<span class="letter-spacing cat-name font-extra text-uppercase font-sm">Weekends</span>
-									</div>
-									<h3 class="post-title mt-2"><a href="/1">One Week Itinerary</a></h3>
-
-									<div class="post-meta">
-										<ul class="list-inline">
-											<li class="post-like list-inline-item">
-												<span class="font-sm letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>4 min
-													read</span>
-											</li>
-											<li class="post-view list-inline-item letter-spacing-1">89 Views</li>
-										</ul>
-									</div>
-									<div class="post-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Magnam nesciunt architecto quaerat
-											necessitatibus tenetur ratione eius numquam!</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="mb-4 post-list border-bottom pb-4">
-						<div class="row no-gutters">
-							<div class="col-md-5">
-								<a class="post-thumb" href="/1">
-									<img src="{% static 'images/fashion/img-5.jpg' %}" alt="" class="img-fluid w-100">
-								</a>
-							</div>
-
-							<div class="col-md-7">
-								<div class="post-article mt-sm-3">
-									<div class="meta-cat">
-										<span class="letter-spacing cat-name font-extra text-uppercase font-sm">lifestyle</span>
-									</div>
-									<h3 class="post-title mt-2"><a href="/1">Start Living Today</a></h3>
-
-									<div class="post-meta">
-										<ul class="list-inline">
-											<li class="post-like list-inline-item">
-												<span class="font-sm letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>2 min
-													read</span>
-											</li>
-											<li class="post-view list-inline-item letter-spacing-1">572 Views</li>
-										</ul>
-									</div>
-									<div class="post-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Magnam nesciunt architecto quaerat
-											necessitatibus tenetur ratione eius numquam!</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="mb-4 post-list border-bottom pb-4">
-						<div class="row no-gutters">
-							<div class="col-md-5">
-								<a class="post-thumb" href="/1">
-									<img src="{% static 'images/fashion/img-6.jpg' %}" alt="" class="img-fluid w-100">
-								</a>
-							</div>
-
-							<div class="col-md-7">
-								<div class="post-article mt-sm-3">
-									<div class="meta-cat">
-										<span class="letter-spacing cat-name font-extra text-uppercase font-sm">Travel</span>
-									</div>
-									<h3 class="post-title mt-2"><a href="/1">Hint of Spring</a></h3>
-
-									<div class="post-meta">
-										<ul class="list-inline">
-											<li class="post-like list-inline-item">
-												<span class="font-sm letter-spacing-1 text-uppercase"><i class="ti-time mr-2"></i>3 min
-													read</span>
-											</li>
-											<li class="post-view list-inline-item letter-spacing-1">209 Views</li>
-										</ul>
-									</div>
-									<div class="post-content">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.Magnam nesciunt architecto quaerat
-											necessitatibus tenetur ratione eius numquam!</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-
-
-					<div class="pagination mt-5 pt-4">
-						<ul class="list-inline">
-							<li class="list-inline-item"><a href="#" class="active">1</a></li>
-							<li class="list-inline-item"><a href="#">2</a></li>
-							<li class="list-inline-item"><a href="#">3</a></li>
-							<li class="list-inline-item"><a href="#" class="prev-posts"><i class="ti-arrow-right"></i></a></li>
-						</ul>
-					</div>
 				</div>
 				<div class="col-lg-4 col-md-8 col-sm-12 col-xs-12">
 					<div class="sidebar sidebar-right">
@@ -299,7 +132,7 @@
 
 							{% include "blog-trendingposts.html" %}
 
-							{% include "blog-categories.html" %}
+							{% count_blog_categories %}
 
 							{% include "blog-newsletter.html" %}
 

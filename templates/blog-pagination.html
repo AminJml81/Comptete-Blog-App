@@ -1,0 +1,15 @@
+<div class="pagination mt-5 pt-4">
+    <ul class="pagination">
+        {% if posts.has_previous %}
+        <li class="list-inline-item mb-2"><a href="?page={{posts.previous_page_number}}" class="prev-posts"><i class="ti-arrow-left"></i></a></li>
+        {%endif%}
+
+        {% for page_number in posts.paginator.page_range %}
+        <li class="list-inline-item"><a href="?page={{page_number}}" class="{% if page_number == posts.number %}active{% endif %}">{{page_number}}</a></li>
+        {%endfor%}
+
+        {% if posts.has_next %}
+        <li class="list-inline-item"><a href="?page={{posts.next_page_number}}" class="next-posts"><i class="ti-arrow-right"></i></a></li>
+        {%endif%}
+    </ul>
+</div>

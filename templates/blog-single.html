@@ -27,19 +27,19 @@
                             </div>
                             <!-- post title-->
                             <h2 class="post-title mt-2">
-                                First Look At Self-Portrait's Autumn Collection
+                                {{post.title}}
                             </h2>
 
                             <div class="post-meta"><!-- post author and date-->
                                 <span class="text-uppercase font-sm letter-spacing-1 mr-3">by Liam</span>
-                                <span class="text-uppercase font-sm letter-spacing-1">January 17,2019</span>
+                                <span class="text-uppercase font-sm letter-spacing-1">{{post.published_date}}</span>
                             </div>
                             <div class="post-featured-image mt-5"> <!-- post image-->
                                 <img src="{% static 'images/fashion/bg-banner.jpg' %}" class="img-fluid w-100" alt="featured-image">
                             </div>
                         </div>
                         <div class="post-body">
-                            <div class="entry-content"> <!--post content-->
+                            {% comment %} <div class="entry-content"> <!--post content-->
                                 <p> It was a cheerful prospect. I asked Perry what he thought about it; but he only
                                     shrugged his shoulders and continued a longwinded prayer he had been at for some
                                     time. He was wont to say that the only redeeming feature of our captivity was the
@@ -78,6 +78,9 @@
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab ratione animi
                                     nobis in et consequatur
                                     earum modi repellendus, qui, non debitis pariatur tempora consequuntur!</p>
+                            </div> {% endcomment %}
+                            <div class="entry-content">
+                                {{post.content}}
                             </div>
                             <!--post tags-->
                             <div class="post-tags py-4">
