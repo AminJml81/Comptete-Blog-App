@@ -35,13 +35,6 @@ def blog_single_view(request, pid:int):
         return render(request, 'blog-single.html', context)
     
 
-def search_view(request):
-    posts = Post.objects.filter(status=True)
-    posts = get_list_or_404(posts, Q(title__in=keyword) | Q(content__in=keyword))
-    context = {'posts':posts}
-    return render(request,'index.html', context)
-
-
 def contact_view(request):
     return render(request, 'contact.html')
 
