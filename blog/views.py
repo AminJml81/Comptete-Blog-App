@@ -4,13 +4,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 
 # Create your views here.
-# {% url 'blog:category' category=cat %}
 def index_view(request,*args, **kwargs):
     posts = Post.objects.filter(status=True)
-    print(kwargs)
-    print(args)
 
-    # print(request.GET.get('category'))
     if (category :=request.GET.get('category')):
         print(category)
         posts = posts.filter(categories__name=category)
@@ -33,14 +29,6 @@ def blog_single_view(request, pid:int):
         increment_post(post)
         context = {'post':post}
         return render(request, 'blog-single.html', context)
-    
-
-def contact_view(request):
-    return render(request, 'contact.html')
-
-def about_view(request):
-    return render(request, 'about.html')
-
 
 def increment_post(post: Post):
     post.views += 1
