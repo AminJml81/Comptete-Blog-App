@@ -31,16 +31,33 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # captcha related apps
+    'captcha',
+    "multi_captcha_admin",
+    'django_recaptcha',
     "django.contrib.admin",
+
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # sites framework
+    "django.contrib.sites",
+
+    # sitesmap
+    "django.contrib.sitemaps",
+
+    #robots
+    "robots",
+
+    #taggit
+    "taggit",
     
     #local apps
     "blog.apps.BlogConfig",
-    'website.apps.WebsiteConfig'
+    "website.apps.WebsiteConfig"
 ]
 
 MIDDLEWARE = [
@@ -134,3 +151,17 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'recaptcha',
+}
+
+RECAPTCHA_PRIVATE_KEY = '6Lc2Fg0qAAAAABuLc_A-ewH5xyxGsBUmxemS5qxH'
+RECAPTCHA_PUBLIC_KEY = '6Lc2Fg0qAAAAAE3AHBvx4gN_r8aTS992a7JDAwj3'
+RECAPTCHA_REQUIRED_SCORE = 0.7
+
+#sites framework
+SITE_ID = 1
+
+#taggit
+TAGGIT_CASE_INSENSITIVE = True

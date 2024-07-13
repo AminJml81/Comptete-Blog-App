@@ -28,6 +28,16 @@
 
 
     <section class="pt-5 padding-bottom">
+        
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} notification" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+            {{ message }}
+        </div>
+        {% endfor %}
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -70,17 +80,25 @@
                                                 id="message" rows="7" required></textarea>
                                         </div>
 
+                                        {{form.captcha}}
+                                        
                                         <button class="btn btn-primary solid blank mt-3" type="submit">Send
                                             Message</button>
                                     </div>
                                 </div>
-                            </form>
+                            </form>                            
                         </div>
+                        
                     </div>
+                    
                 </div>
+                
             </div>
+            
         </div>
+        
     </section>
+    
     {% endblock content %}
 
 </body>

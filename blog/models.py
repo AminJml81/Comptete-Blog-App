@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
+
 # Create your models here.
 
 class Category(models.Model):
@@ -17,7 +19,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False ) 
     content = models.TextField(max_length=1024, null=False, blank=False )
     categories = models.ManyToManyField(Category, related_name='posts')
-    #tags = 
+    tags = TaggableManager()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now_add=True)

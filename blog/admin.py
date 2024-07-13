@@ -18,7 +18,14 @@ class PostAdmin(admin.ModelAdmin):
         (
             'Post',
             {
-                "fields": ["image", 'author', "title", "content", 'categories'],
+                "fields": ["image", 'author', "title", "content",],
+            },
+        ),
+        (
+            "Grouping Options",
+            {
+                "classes": ["wide"],
+                "fields": ['categories', 'tags'],
             },
         ),
         (

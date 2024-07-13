@@ -20,18 +20,24 @@
                         <div class="post-header mb-5 text-center">
                             <!-- post category-->
                             <div class="meta-cat">
+                                {% for cat in post.categories.all %}
                                 <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1"
-                                    href="#">Health ,</a>
-                                <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1"
-                                    href="#">lifestyle</a>
+                                href="/?category={{cat}}"><span class="letter-spacing cat-name font-extra text-uppercase font-sm"></span>
+                                        {% if not forloop.last %}
+                                            {{cat}}</a>,
+                                        {% else %}
+                                            {{cat}}</a>
+                                        {%endif%}
+                                    {% endfor %}
+                                </a>
                             </div>
                             <!-- post title-->
                             <h2 class="post-title mt-2">
                                 {{post.title}}
                             </h2>
 
-                            <div class="post-meta"><!-- post author and date-->
-                                <span class="text-uppercase font-sm letter-spacing-1 mr-3">by Liam</span>
+                            <div class="post-meta"><!-- post author and date-->                         
+                                <span class="text-uppercase font-sm letter-spacing-1 mr-3">by <a href="/?author={{post.author}}">{{post.author}}</a></span>
                                 <span class="text-uppercase font-sm letter-spacing-1">{{post.published_date}}</span>
                             </div>
                             <div class="post-featured-image mt-5"> <!-- post image-->
@@ -84,9 +90,9 @@
                             </div>
                             <!--post tags-->
                             <div class="post-tags py-4">
-                                <a href="#">#Health</a>
-                                <a href="#">#Game</a>
-                                <a href="#">#Tour</a>
+                                {% for tag in post.tags.all %}
+                                <a href="/?tag={{tag}}">#{{tag}}</a>
+                                {%endfor%}
                             </div>
 
                             <!--post comment like-->

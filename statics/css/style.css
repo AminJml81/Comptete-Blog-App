@@ -1526,6 +1526,12 @@ footer
   padding-bottom: 12px;
 }
 
+.notification{
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+}
+
 .footer-home {
   padding-left: 320px;
   position: relative;

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 
 from website.forms import ContactForm
 # Create your views here.
@@ -8,6 +9,8 @@ def contact_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
+        else:
+            messages.add_message(request, messages.ERROR, "Captcha Is Required")
         
     form = ContactForm()
     context = {'form': form}

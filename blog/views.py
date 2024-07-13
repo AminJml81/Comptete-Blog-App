@@ -7,12 +7,17 @@ from django.db.models import Q
 def index_view(request,*args, **kwargs):
     posts = Post.objects.filter(status=True)
 
+    print(request.GET)
     if (category :=request.GET.get('category')):
-        print(category)
-        posts = posts.filter(categories__name=category)
+        posts = posts.filter(categories__name=category.title())
 
-    if (q := request.GET.get('q')):
-        print(q)
+    elif (tag :=request.GET.get('tag')):
+        posts = posts.filter(tags__name=tag.title())
+
+    elif (given_author :=request.GET.get('author')):
+        posts = posts.filter(author__username=given_author)
+
+    elif (q := request.GET.get('q')):
         posts = posts.filter(Q(title__icontains=q) | Q(content__icontains=q))
 
     
