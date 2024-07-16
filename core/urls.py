@@ -28,16 +28,17 @@ sitemaps = {
     'post': PostSitemap,
     'static':StaticViewSitemap
 }
-
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    #local apps
+    # local apps
     path('', include('website.urls')),
     path('', include('blog.urls')),
 
-    #other framework realted paths:
+    # frameworks related paths
 
+    # allauth
+    path('accounts/', include('account.urls')),
     # captcha
     path('captcha/', include('captcha.urls')),
 
@@ -45,7 +46,7 @@ urlpatterns = [
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps},
           name="django.contrib.sitemaps.views.sitemap",),
 
-    #robots
+    # robots
     path('robots.txt', include('robots.urls')),
 
 

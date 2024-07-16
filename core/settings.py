@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,15 +35,19 @@ INSTALLED_APPS = [
     'captcha',
     "multi_captcha_admin",
     'django_recaptcha',
-    "django.contrib.admin",
 
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # sites framework
+    # allauth 
+    'allauth',
+    'allauth.account',
+
+    # sites
     "django.contrib.sites",
 
     # sitesmap
@@ -57,7 +61,7 @@ INSTALLED_APPS = [
     
     #local apps
     "blog.apps.BlogConfig",
-    "website.apps.WebsiteConfig"
+    "website.apps.WebsiteConfig",
 ]
 
 MIDDLEWARE = [
@@ -68,6 +72,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    # allauth
+    "allauth.account.middleware.AccountMiddleware",
+
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -137,7 +145,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = 'media/' 
+MEDIA_URL = 'media/' 
 
 STATIC_ROOT = BASE_DIR/'static'
 MEDIA_ROOT = BASE_DIR/'media'
@@ -152,6 +160,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# recaptcha settings
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'recaptcha',
 }
@@ -160,8 +169,50 @@ RECAPTCHA_PRIVATE_KEY = '6Lc2Fg0qAAAAABuLc_A-ewH5xyxGsBUmxemS5qxH'
 RECAPTCHA_PUBLIC_KEY = '6Lc2Fg0qAAAAAE3AHBvx4gN_r8aTS992a7JDAwj3'
 RECAPTCHA_REQUIRED_SCORE = 0.7
 
-#sites framework
+# sites setting
 SITE_ID = 1
 
-#taggit
+# taggit
 TAGGIT_CASE_INSENSITIVE = True
+
+# allauth settings
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_CHANGE_EMAIL = True
+
+# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = 
+# ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_EMAIL_CONFIRMATION_HMAC = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# ACCOUNT_LOGIN_BY_CODE_ENABLED = True
+# ACCOUNT_LOGIN_BY_CODE_TIMEOUT = 300
+
+ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
+
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_UNIQUE_EMAIL = True
+
+LOGIN_REDIRECT_URL='/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_SIGNUP_REDIRECT_URL = '/'
+
+
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = config("EMAIL_PORT")
+# EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+EMAIL_HOST_USER = config('USER_EMAIL')
+EMAIL_HOST_PASSWORD = config('USER_PASSWORD')

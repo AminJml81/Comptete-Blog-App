@@ -7,7 +7,6 @@ from django.db.models import Q
 def index_view(request,*args, **kwargs):
     posts = Post.objects.filter(status=True)
 
-    print(request.GET)
     if (category :=request.GET.get('category')):
         posts = posts.filter(categories__name=category.title())
 
