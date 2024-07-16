@@ -131,18 +131,22 @@
                     </div>
                     <!-- prev next post-->
                     <nav class="post-pagination clearfix border-top border-bottom py-4">
+                        {% if prev_post %}
                         <div class="prev-post">
-                            <a href="blog-single.html">
-                                <span class="text-uppercase font-sm letter-spacing">Next</span>
-                                <h4 class="mt-3"> Intel’s new smart glasses actually look good</h4>
-                            </a>
-                        </div>
-                        <div class="next-post">
-                            <a href="blog-single.html">
+                            <a href="{% url 'blog:single' pid=prev_post.id %}">
                                 <span class="text-uppercase font-sm letter-spacing">Previous</span>
-                                <h4 class="mt-3">Free Two-Hour Delivery From Whole Foods</h4>
+                                <h4 class="mt-3">{{prev_post.title}}</h4>
                             </a>
                         </div>
+                        {% endif %}
+                        {% if next_post %}
+                        <div class="next-post">
+                            <a href="{% url 'blog:single' pid=next_post.id %}">
+                                <span class="text-uppercase font-sm letter-spacing">Next</span>
+                                <h4 class="mt-3">{{next_post.title}}</h4>
+                            </a>
+                        </div>
+                        {% endif %}
                     </nav>
                     <div class="related-posts-block mt-5">
                         <h3 class="news-title mb-4 text-center">
