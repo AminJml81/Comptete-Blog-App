@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Post, Category 
+from blog.models import Post, Category, Comment
 # Register your models here.
 
 @admin.register(Post)
@@ -48,3 +48,11 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Category)    
 class CategoryAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_date'
+    list_display = ('username', 'email', 'post', 'approved', 'message')
+    list_filter = ('username', 'post', 'approved',)
+    search_fields = ('username', 'post', 'message')
+

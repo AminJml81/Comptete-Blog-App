@@ -14,6 +14,7 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
     
+
 class Post(models.Model):
     image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
     title = models.CharField(max_length=255, null=False, blank=False ) 
@@ -27,7 +28,6 @@ class Post(models.Model):
     status = models.BooleanField(default=1)
     views = models.PositiveIntegerField(default=0)
     time_to_read = models.PositiveIntegerField(default=1)
-    #comments
     
     class meta:
         ordering = ('-created_date',)
@@ -39,3 +39,18 @@ class Post(models.Model):
         return reverse("blog:single", kwargs={"pid": self.pk})
         
         
+class Comment(models.Model):
+    message = models.TextField(max_length=1024, null=False, blank=False)
+    username = models.CharField(max_length=30, null=False, blank=False)
+    email = models.EmailField(max_length=30, null=False, blank=False)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ['-created_date']
+        
+    def __str__(self) -> str:
+        return self.message[:20]
