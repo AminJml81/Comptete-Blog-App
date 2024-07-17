@@ -7,7 +7,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+print('yawa')
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",

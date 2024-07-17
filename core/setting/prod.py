@@ -1,12 +1,12 @@
 from core.settings import *
+from decouple import config
 
-
-SECRET_KEY = "django-insecure-g(m^8r^r&!jp+bn1rdhc0q3%zak+46l7my#8d3qs%i24nhnzc*"
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS')
 
 
 DATABASES = {
