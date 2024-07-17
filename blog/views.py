@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.contrib import messages
 from blog.forms import CommentForm
 
+
 # Create your views here.
 def index_view(request,*args, **kwargs):
     posts = Post.objects.filter(published_date__lte=timezone.now(), status=True)
@@ -37,16 +38,7 @@ def blog_single_view(request, pid:int):
     # if user is adding a comment
     if request.method == 'POST':
         form = CommentForm(request.POST)
-        if form.is_valid():
-            form.instance.post = post
-            form.instance.username = request.user.username
-            form.instance.email = request.user.email
-
-            form.save()
-            messages.add_message(request, messages.SUCCESS, 'your comment added successfully')
-        else:
-            print(form.errors)
-            messages.add_message(request, messages.ERROR, "your comment didn't added successfully")
+        blog_single_post_view(request, form, post)
 
     if post:
         form = CommentForm() if request.user.is_authenticated else None
@@ -58,6 +50,21 @@ def blog_single_view(request, pid:int):
 
     return render(request, 'blog-single.html', context)
 
+def blog_single_post_view(request, form, post):
+    # Post Method for blog single, (User is adding a comment)
+    COMMENT_SUCCESS_MESSAGE = 'your comment added successfully'
+    COMMENT_FAILURE_MESSAGE = "your comment didn't added successfully"
+    if form.is_valid():
+        form.instance.post = post
+        form.instance.username = request.user.username
+        form.instance.email = request.user.email
+
+        form.save()
+        messages.add_message(request, messages.SUCCESS, COMMENT_SUCCESS_MESSAGE)
+    else:
+        messages.add_message(request, messages.ERROR, COMMENT_FAILURE_MESSAGE)
+
+    
 def find_prev_next_posts(post: Post):
     posts = list(Post.objects.filter(published_date__lte=timezone.now(), status=1))
     main_post_index = posts.index(post)
@@ -67,9 +74,9 @@ def find_prev_next_posts(post: Post):
 
 
 def find_blog_comments(post: Post):
-    return Comment.objects.filter(post=post)
-    
+    return Comment.objects.filter(post=post, approved=True)
 
 def increment_post_view(post: Post):
     post.views += 1
     post.save()
+
