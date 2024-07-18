@@ -41,13 +41,10 @@
                                 <span class="text-uppercase font-sm letter-spacing-1 mr-3">by <a href="{% url 'blog:author' author=post.author%}">{{post.author}}</a></span>
                                 <span class="text-uppercase font-sm letter-spacing-1">{{post.published_date}}</span>
                             </div>
-                            <div class="post-featured-image mt-5"> <!-- post image-->
-                                <img src="{% static 'images/fashion/bg-banner.jpg' %}" class="img-fluid w-100" alt="featured-image">
-                            </div>
                         </div>
                         <div class="post-body">
                             <div class="entry-content">
-                                {{post.content}}
+                                {{post.content|safe}}
                             </div>
                             <!--post tags-->
                             <div class="post-tags py-4">
