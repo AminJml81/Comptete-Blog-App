@@ -2,17 +2,11 @@ from core.settings import *
 
 SECRET_KEY = "django-insecure-g(m^8r^r&!jp+bn1rdhc0q3%zak+46l7my#8d3qs%i24nhnzc*"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+INTERNAL_IPS = ["127.0.0.1"]
 
 DATABASES = {
     "default": {
@@ -24,3 +18,6 @@ DATABASES = {
         "PORT": config("DEV_DB_PORT")
     }
 }
+
+INSTALLED_APPS.append('debug_toolbar')
+MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
