@@ -19,7 +19,12 @@ def count_blog_categories():
     return {'categories': categories} 
 
 
+@register.inclusion_tag('blog-trendingposts.html')
+def trending_posts():
+    posts = Post.objects.all().order_by('-views')[:3]
+    return {'post1':posts[0], 'posts':posts[1:]}
+
+
 def get_all_posts():
     posts = Post.objects.filter(status=True)
     return posts
-    

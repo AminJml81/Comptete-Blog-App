@@ -18,11 +18,11 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS')
 
 DATABASES = {
     "default": {
-        "ENGINE": config("DEV_DB_ENGINE"),
-        "NAME": config("DEV_DB_NAME"),
-        "USER": config("DEV_DB_USER"),
-        "PASSWORD": config("DEV_DB_PASSWORD"),
-        "HOST": config("DEV_DB_HOST"),
-        "PORT": config("DEV_DB_PORT")
+        "ENGINE": config("PROD_DB_ENGINE"),
+        "NAME": config("PROD_DB_NAME"),
+        "USER": config("PROD_DB_USER"),
+        "PASSWORD": config("PROD_DB_PASSWORD"),
+        "HOST": config("PROD_DB_HOST"),
+        "PORT": config("PROD_DB_PORT")
     }
 }
