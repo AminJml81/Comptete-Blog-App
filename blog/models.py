@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 
+from tinymce.models import HTMLField
+
 # Create your models here.
 
 class Category(models.Model):
@@ -18,7 +20,8 @@ class Category(models.Model):
 class Post(models.Model):
     image = models.ImageField(upload_to='blog/', default='blog/default.jpg')
     title = models.CharField(max_length=255, null=False, blank=False ) 
-    content = models.TextField(max_length=1024, null=False, blank=False )
+    # content = models.TextField(max_length=1024, null=False, blank=False )
+    content = HTMLField(max_length=1024, null=False, blank=False )
     categories = models.ManyToManyField(Category, related_name='posts')
     tags = TaggableManager()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')

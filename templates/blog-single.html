@@ -155,8 +155,6 @@
                         <h3 class="mb-4 text-center">{{comments|length}} comments</h3>
                         {% for comment in comments %}
                         <div class="comment-area-box media mt-5">
-                            {% comment %} <img alt="" src="{% static 'images/blog-user-2.jpg' %}" class="img-fluid float-left mr-3 mt-2"> {% endcomment %}
-
                             <div class="media-body ml-4">
                                 <h4 class="mb-0">{{comment.username}} </h4>
                                 <span class="date-comm font-sm text-capitalize text-color"><i

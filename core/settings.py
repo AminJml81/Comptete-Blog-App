@@ -47,11 +47,14 @@ INSTALLED_APPS = [
     # sitesmap
     "django.contrib.sitemaps",
 
-    #robots
+    # robots
     "robots",
 
-    #taggit
+    # taggit
     "taggit",
+    
+    # tinymce
+    'tinymce',
     
     #local apps
     "blog.apps.BlogConfig",

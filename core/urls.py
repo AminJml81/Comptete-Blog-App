@@ -49,6 +49,11 @@ urlpatterns = [
     # robots
     path('robots.txt', include('robots.urls')),
 
+    # tinymce
+    path('tinymce/', include('tinymce.urls')),
+
+
+
 
 ]
 
