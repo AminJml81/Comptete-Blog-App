@@ -21,8 +21,11 @@ def count_blog_categories():
 
 @register.inclusion_tag('blog-trendingposts.html')
 def trending_posts():
-    posts = Post.objects.all().order_by('-views')[:3]
-    return {'post1':posts[0], 'posts':posts[1:]}
+    posts = Post.objects.all().order_by('-views')
+    if posts:
+        posts = posts[:3]
+        return {'post1':posts[0], 'posts':posts[1:]}
+    return None
 
 
 def get_all_posts():
