@@ -11,14 +11,14 @@ class PostAdmin(admin.ModelAdmin):
     
     date_hierarchy = 'published_date'
     list_display = ('title', 'short_content','views' ,'status', 'published_date','created_date', 'updated_date', 'author')
-    list_filter = ('status', 'categories', 'author')
+    list_filter = ('status', 'login_require', 'categories', 'author',)
     search_fields = ('title', 'auhtor', 'content', 'author')
     
     fieldsets = [
         (
             'Post',
             {
-                "fields": ["image", 'author', "title", "content",],
+                "fields": ["image", 'author', "title", "content", 'login_require'],
             },
         ),
         (

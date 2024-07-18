@@ -27,6 +27,7 @@ class Post(models.Model):
     published_date =models.DateTimeField(null=False, blank=False)
     status = models.BooleanField(default=1)
     views = models.PositiveIntegerField(default=0)
+    login_require = models.BooleanField(default=False)
     time_to_read = models.PositiveIntegerField(default=1)
     
     class meta:

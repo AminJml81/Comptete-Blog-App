@@ -11,8 +11,8 @@ urlpatterns = [
     path('category/<str:category>', views.index_view, name='category'),
     path('tag/<str:tag>', views.index_view, name='tag'),
     path('author/<str:author>', views.index_view, name='author'),
-    path('blog/<int:pid>', views.blog_single_view, name='single'),
-
+    path('blog/<int:pid>/', views.blog_single_view, name='single'),
+    
     #rssfeed
     path("feed/rss/", LatestBlogFeed(), name='rss_feed'),
     path("feed/rss/category/<str:category", LatestBlogFeed(), name='rss_feed_category'),

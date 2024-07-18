@@ -31,6 +31,9 @@
 							<div class="form-group d-flex">
 								<input name='password' type="password" class="form-control rounded-left" placeholder="Password" required>
 							</div>
+							{% if request.GET.next %}
+								<input type="hidden" name="next" value="{{ request.GET.next }}"/>
+							{% endif %}
 							<div class="form-group">
 								<button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
 							</div>
@@ -38,10 +41,6 @@
 							<div class="form-group d-md-flex">
 								<div class="w-50">
 									<a href="{% url 'account_signup' %}">Sign Up</a>
-									{% comment %} <label class="checkbox-wrap checkbox-primary">Remember Me
-										<input type="checkbox" checked>
-											<span class="checkmark"></span>
-									</label> {% endcomment %}
 								</div>
 								<div class="w-50 text-md-right">
 									<a href="{% url 'account_reset_password' %}">Forgot Password</a>

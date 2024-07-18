@@ -23,7 +23,7 @@
                             <div class="meta-cat">
                                 {% for cat in post.categories.all %}
                                 <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1"
-                                href="/?category={{cat}}"><span class="letter-spacing cat-name font-extra text-uppercase font-sm"></span>
+                                href="{% url 'blog:category' category=cat.name%}"><span class="letter-spacing cat-name font-extra text-uppercase font-sm"></span>
                                         {% if not forloop.last %}
                                             {{cat}}</a>,
                                         {% else %}
@@ -38,7 +38,7 @@
                             </h2>
 
                             <div class="post-meta"><!-- post author and date-->                         
-                                <span class="text-uppercase font-sm letter-spacing-1 mr-3">by <a href="/?author={{post.author}}">{{post.author}}</a></span>
+                                <span class="text-uppercase font-sm letter-spacing-1 mr-3">by <a href="{% url 'blog:author' author=post.author%}">{{post.author}}</a></span>
                                 <span class="text-uppercase font-sm letter-spacing-1">{{post.published_date}}</span>
                             </div>
                             <div class="post-featured-image mt-5"> <!-- post image-->
@@ -92,7 +92,7 @@
                             <!--post tags-->
                             <div class="post-tags py-4">
                                 {% for tag in post.tags.all %}
-                                <a href="/?tag={{tag}}">#{{tag}}</a>
+                                <a href="{% url 'blog:tag' tag=tag%}">#{{tag}}</a>
                                 {%endfor%}
                             </div>
 
@@ -186,7 +186,7 @@
                     </form>
                     
                     {% else %}
-                    <a href="{% url 'account_login' %}">Login/Sign Up to Comment</a>
+                    <a class='btn btn-primary' href="{% url 'manage_account' %}">Login/Sign Up to Comment</a>
                     {%endif%}
 
 
