@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    # humanize
+    "django.contrib.humanize",
+    
     # allauth 
     'allauth',
     'allauth.account',
@@ -46,6 +49,9 @@ INSTALLED_APPS = [
     
     # tinymce
     'tinymce',
+
+    # compressor
+    # 'compressor',
     
     #local apps
     "blog.apps.BlogConfig",
@@ -180,3 +186,13 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = config('USER_EMAIL')
 EMAIL_HOST_PASSWORD = config('USER_PASSWORD')
+
+
+# STATICFILES_FINDERS = (
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     # other finders..
+#     'compressor.finders.CompressorFinder',
+# )
+
+# COMPRESS_ENABLED = True

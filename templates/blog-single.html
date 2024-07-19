@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% load blog_tags %}
 <!--WEBSITE: https://themefisher.com-->
 
@@ -39,7 +40,7 @@
 
                             <div class="post-meta"><!-- post author and date-->                         
                                 <span class="text-uppercase font-sm letter-spacing-1 mr-3">by <a href="{% url 'blog:author' author=post.author%}">{{post.author}}</a></span>
-                                <span class="text-uppercase font-sm letter-spacing-1">{{post.published_date}}</span>
+                                <span class="text-uppercase font-sm letter-spacing-1">{{post.published_date|date:"d M Y"}}</span>
                             </div>
                         </div>
                         <div class="post-body">
@@ -115,7 +116,7 @@
                             <div class="media-body ml-4">
                                 <h4 class="mb-0">{{comment.username}} </h4>
                                 <span class="date-comm font-sm text-capitalize text-color"><i
-                                        class="ti-time mr-2"></i>{{comment.created_date}} </span>
+                                        class="ti-time mr-2"></i>{{comment.created_date|naturalday}} </span>
 
                                 <div class="comment-content mt-3">
                                     <p>{{comment.message}}</p>
