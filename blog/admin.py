@@ -10,7 +10,7 @@ class PostAdmin(admin.ModelAdmin):
         return obj.content[:40]
     
     date_hierarchy = 'published_date'
-    list_display = ('title', 'short_content','views' ,'status', 'published_date','created_date', 'updated_date', 'author')
+    list_display = ('title', 'short_content','views' ,'login_require','status', 'published_date','created_date', 'updated_date', 'author')
     list_filter = ('status', 'login_require', 'categories', 'author',)
     search_fields = ('title', 'auhtor', 'content', 'author')
     

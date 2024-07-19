@@ -1,4 +1,5 @@
 from django import template
+from django.utils import timezone
 from blog.models import Post
 
 register = template.Library()
@@ -21,7 +22,8 @@ def count_blog_categories():
 
 @register.inclusion_tag('blog-trendingposts.html')
 def trending_posts():
-    posts = Post.objects.all().order_by('-views')
+    posts = get_all_posts()
+    posts = posts.order_by('-views')
     if posts:
         posts = posts[:3]
         return {'post1':posts[0], 'posts':posts[1:]}
@@ -29,5 +31,5 @@ def trending_posts():
 
 
 def get_all_posts():
-    posts = Post.objects.filter(status=True)
+    posts = Post.objects.filter(published_date__lte=timezone.now(), status=True)
     return posts
