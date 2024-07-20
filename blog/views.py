@@ -13,9 +13,12 @@ def index_view(request, *args, **kwargs):
     posts = Post.objects.filter(published_date__lte=timezone.now(), status=True)
     if (category :=kwargs.get('category')):
         posts = posts.filter(categories__name=category.title())
+        # all post categories are title
+
 
     elif (tag :=kwargs.get('tag')):
-        posts = posts.filter(tags__name=tag.title())
+        posts = posts.filter(tags__name=tag.lower())
+        # all post tags are lowercase
 
     elif (given_author :=kwargs.get('author')):
         posts = posts.filter(author__username=given_author)
@@ -41,11 +44,10 @@ def blog_single_view(request, pid:int):
         form = CommentForm(request.POST)
         blog_single_post_view(request, form, post)
 
-    # if this post is login only and user is not logged in
+    # if this post is login_required and user is not logged in
     if request.user.is_authenticated == False and post.login_require == True:
         messages.error(request, 'Please Sign in to view VIP Blogs')
         url = reverse('account_login')  + '?next=' + post.get_absolute_url()
-        #return redirect(reverse('account_login'))
         return redirect(url)
     
     if post:
