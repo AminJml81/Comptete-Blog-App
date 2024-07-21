@@ -64,7 +64,7 @@ def blog_single_view(request, pid:int):
 def blog_single_post_view(request, form, post):
     # Post Method for blog single, (User is adding a comment)
     COMMENT_SUCCESS_MESSAGE = 'your comment added successfully'
-    COMMENT_FAILURE_MESSAGE = "your comment didn't added successfully"
+    COMMENT_FAILURE_MESSAGE = "your comment didn't add successfully"
     if form.is_valid():
         form.instance.post = post
         form.instance.username = request.user.username
