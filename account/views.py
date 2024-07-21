@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from allauth.account.views import login
-from blog.models import Post
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+
+
+
 # Create your views here.
 
 
@@ -14,9 +18,14 @@ def login_view(request, *args, **kwargs):
         if 'blog' in next_url: 
             post_id = next_url.split('/')
             post_id = int(post_id[2])
-            next_url = reverse('blog:single', kwargs={'pid':post_id})
             login(request)
+            next_url = reverse('blog:single', kwargs={'pid':post_id})
+            if not request.user.is_authenticated:
+                messages.error(request, 'The username and/or password you specified are not correct.')
+                return HttpResponseRedirect(request.path_info)
+
             return redirect(next_url)
+                
         
         login(request)
         return redirect('/')

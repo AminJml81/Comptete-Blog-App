@@ -1,4 +1,4 @@
-from django.urls import path, reverse
+from django.urls import path
 
 from website import views
 
