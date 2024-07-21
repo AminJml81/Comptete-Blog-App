@@ -18,6 +18,7 @@ def login_view(request, *args, **kwargs):
             login(request)
             return redirect(next_url)
         
+        login(request)
         return redirect('/')
     else:
         return login(request)
