@@ -92,7 +92,3 @@ def find_blog_comments(post: Post):
 def increment_post_view(post: Post):
     post.views += 1
     post.save()
-
-
-def not_found(request):
-    return render(request,'404.html')

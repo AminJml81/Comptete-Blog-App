@@ -12,7 +12,6 @@ urlpatterns = [
     path('tag/<str:tag>', views.index_view, name='tag'),
     path('author/<str:author>', views.index_view, name='author'),
     path('blog/<int:pid>/', views.blog_single_view, name='single'),
-    path('404/', views.not_found, name='not_found'),
     #rssfeed
     path("feed/rss/", LatestBlogFeed(), name='rss_feed'),
 ]
