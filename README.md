@@ -8,6 +8,7 @@ Instructor github: https://github.com/AliBigdeli/
 
 Template Link: https://themewagon.com/themes/free-bootstrap-blogging-website-template-revolve/
 
+
 ## Project Descriptions:
 - index page with pagintaion of 6 posts per page.(also posts with certain categories, tags, authors can be filterd in this page)
 - single page which users can read the entire blog content and also add comments.
@@ -117,3 +118,4 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.setting.prod")
 
 
 ## Project Model Schema
+![Blog-Project-Model-Schema](https://github.com/user-attachments/assets/f2452fbb-8c7e-4149-96af-e3756a879793)
