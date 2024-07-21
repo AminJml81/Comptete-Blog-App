@@ -5,7 +5,7 @@ from blog.models import Post
 register = template.Library()
 
     
-@register.inclusion_tag('blog-categories.html')
+@register.inclusion_tag('blog/blog-categories.html')
 def count_blog_categories():
     posts = get_all_posts()
     categories = {}
@@ -20,7 +20,7 @@ def count_blog_categories():
     return {'categories': categories} 
 
 
-@register.inclusion_tag('blog-trendingposts.html')
+@register.inclusion_tag('blog/blog-trendingposts.html')
 def trending_posts():
     posts = get_all_posts()
     posts = posts.order_by('-views')

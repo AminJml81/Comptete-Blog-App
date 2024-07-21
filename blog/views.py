@@ -32,7 +32,7 @@ def index_view(request, *args, **kwargs):
     posts = paginator.get_page(page_number)
     
     context = {'posts':posts}
-    return render(request, 'index.html', context)
+    return render(request, 'website/index.html', context)
 
 
 
@@ -58,7 +58,7 @@ def blog_single_view(request, pid:int):
         context = {'prev_post':prev_post, 'post':post,
                    'next_post':next_post, 'form':form, 'comments':comments}
 
-    return render(request, 'blog-single.html', context)
+    return render(request, 'blog/blog-single.html', context)
 
 
 def blog_single_post_view(request, form, post):

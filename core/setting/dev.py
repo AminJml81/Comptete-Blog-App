@@ -15,7 +15,7 @@ DATABASES = {
         "USER": config("DEV_DB_USER"),
         "PASSWORD": config("DEV_DB_PASSWORD"),
         "HOST": config("DEV_DB_HOST"),
-        "PORT": config("DEV_DB_PORT")
+        "PORT": config("DEV_DB_PORT", cast=int)
     }
 }
 

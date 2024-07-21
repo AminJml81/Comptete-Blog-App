@@ -8,13 +8,14 @@ def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
+            messages.success(request, "Message Sent")
             form.save()
         else:
-            messages.add_message(request, messages.ERROR, "Captcha Is Required")
+            messages.error(request, "Captcha Is Required")
         
     form = ContactForm()
     context = {'form': form}
-    return render(request, 'contact.html', context)
+    return render(request, 'website/contact.html', context)
 
 def about_view(request):
-    return render(request, 'about.html')
+    return render(request, 'website/about.html')

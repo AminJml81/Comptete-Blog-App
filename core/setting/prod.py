@@ -15,7 +15,7 @@ DATABASES = {
         "USER": config("PROD_DB_USER"),
         "PASSWORD": config("PROD_DB_PASSWORD"),
         "HOST": config("PROD_DB_HOST"),
-        "PORT": config("PROD_DB_PORT")
+        "PORT": config("PROD_DB_PORT", cast=int)
     }
 }
 

@@ -19,13 +19,13 @@ class LatestBlogFeed(Feed):
             return Category.objects.get(name=category.title())
         
         elif tag:= request.GET.get('tag'):
-            return TaggedItem.objects.get(tag_id__name=tag.title())
+            return TaggedItem.objects.filter(tag_id__name=tag.lower()).first()
         
         elif author:= request.GET.get('author'):
             return User.objects.get(username=author)
         
         else:
-            return 
+            return None
 
     def items(self, obj):
 

@@ -140,15 +140,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # recaptcha settings
 MULTI_CAPTCHA_ADMIN = {
-    'engine': 'recaptcha',
+    'engine': 'simple-captcha',
 }
+# MULTI_CAPTCHA_ADMIN = {
+#     'engine': 'recaptcha',
+# }
 
 RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_REQUIRED_SCORE = config('RECAPTCHA_REQUIRED_SCORE', cast=float)
 
 # sites setting
-SITE_ID = 1
+SITE_ID = config("SITE_ID", cast=int)
 
 # taggit
 TAGGIT_CASE_INSENSITIVE = True
@@ -161,9 +164,7 @@ AUTHENTICATION_BACKENDS = [
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
-
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
-ACCOUNT_EMAIL_CONFIRMATION_HMAC = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 

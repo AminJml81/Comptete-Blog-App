@@ -15,7 +15,4 @@ urlpatterns = [
     path('404/', views.not_found, name='not_found'),
     #rssfeed
     path("feed/rss/", LatestBlogFeed(), name='rss_feed'),
-    path("feed/rss/category/<str:category", LatestBlogFeed(), name='rss_feed_category'),
-    path("feed/rss/tag/<str:tag>", LatestBlogFeed(), name='rss_feed_tag'),
-    path("feed/rss/author/<str:author>", LatestBlogFeed(), name='rss_feed_author'),
 ]
