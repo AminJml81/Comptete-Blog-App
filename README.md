@@ -1,5 +1,4 @@
-# Final Project For Maktabkhooneh Django for Beginners Course
-## _Blog Project_
+# _Complete Blog Project_
 
 
 Course Link: https://maktabkhooneh.org/course/%d8%a2%d9%85%d9%88%d8%b2%d8%b4-%d8%ac%d9%86%da%af%d9%88-mk623/
