@@ -1,10 +1,7 @@
 # _Complete Blog Project_
 
 
-Course Link: https://maktabkhooneh.org/course/%d8%a2%d9%85%d9%88%d8%b2%d8%b4-%d8%ac%d9%86%da%af%d9%88-mk623/
-
-Instructor github: https://github.com/AliBigdeli/
-
+## Material Link:
 Template Link: https://themewagon.com/themes/free-bootstrap-blogging-website-template-revolve/
 
 
