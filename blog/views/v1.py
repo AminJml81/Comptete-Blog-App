@@ -1,3 +1,5 @@
+# all views are function based.
+
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from blog.models import Post, Comment
@@ -14,7 +16,6 @@ def index_view(request, *args, **kwargs):
     if (category :=kwargs.get('category')):
         posts = posts.filter(categories__name=category.title())
         # all post categories are title
-
 
     elif (tag :=kwargs.get('tag')):
         posts = posts.filter(tags__name=tag.lower())
@@ -35,7 +36,6 @@ def index_view(request, *args, **kwargs):
     return render(request, 'website/index.html', context)
 
 
-
 def blog_single_view(request, pid:int):
     post = Post.objects.get(id=pid, status=True, published_date__lte=timezone.now())
     context = {}
@@ -43,7 +43,6 @@ def blog_single_view(request, pid:int):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         blog_single_post_view(request, form, post)
-
     # if this post is login_required and user is not logged in
     if request.user.is_authenticated == False and post.login_require == True:
         messages.error(request, 'Please Sign in to view VIP Blogs')
@@ -74,7 +73,6 @@ def blog_single_post_view(request, form, post):
         messages.success(request, COMMENT_SUCCESS_MESSAGE)
 
     else:
-
         messages.error(request, COMMENT_FAILURE_MESSAGE)
 
     

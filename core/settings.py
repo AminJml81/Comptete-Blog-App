@@ -142,9 +142,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # MULTI_CAPTCHA_ADMIN = {
 #     'engine': 'simple-captcha',
 # }
-MULTI_CAPTCHA_ADMIN = {
-    'engine': 'recaptcha',
-}
+# MULTI_CAPTCHA_ADMIN = {
+#     'engine': 'recaptcha',
+# }
 
 RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
